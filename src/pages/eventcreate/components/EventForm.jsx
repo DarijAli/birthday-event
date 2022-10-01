@@ -8,10 +8,15 @@ import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment"
 import { Controller, useForm } from "react-hook-form"
 import { getBase64File } from "utils/helperUtils"
 import { useFormData } from "context/formDataContext"
+import { FieldError } from "components/button/fielderror"
 
 const EventForm = () => {
   const { formData, setFormDataValues } = useFormData()
-  const { handleSubmit, control } = useForm({
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm({
     defaultValues: formData?.values,
   })
   const navigate = useNavigate()
@@ -50,6 +55,9 @@ const EventForm = () => {
                   />
                 )}
               />
+              {!!errors["EventName"] && (
+                <FieldError message={errors["EventName"].message} />
+              )}
             </Grid>
           </Grid>
           <Grid
@@ -83,6 +91,9 @@ const EventForm = () => {
                   />
                 )}
               />
+              {!!errors["HostName"] && (
+                <FieldError message={errors["HostName"].message} />
+              )}
             </Grid>
           </Grid>
           <Grid
@@ -121,6 +132,9 @@ const EventForm = () => {
                     />
                   )}
                 />
+                {!!errors["StartTime"] && (
+                  <FieldError message={errors["StartTime"].message} />
+                )}
               </LocalizationProvider>
             </Grid>
           </Grid>
@@ -160,6 +174,9 @@ const EventForm = () => {
                     />
                   )}
                 />
+                {!!errors["EndTime"] && (
+                  <FieldError message={errors["EndTime"].message} />
+                )}
               </LocalizationProvider>
             </Grid>
           </Grid>
@@ -190,6 +207,9 @@ const EventForm = () => {
                   />
                 )}
               />
+              {!!errors["StreetName"] && (
+                <FieldError message={errors["StreetName"].message} />
+              )}
             </Grid>
           </Grid>
           <Grid container justifyContent={"center"} paddingBottom={2}>
@@ -218,6 +238,9 @@ const EventForm = () => {
                   />
                 )}
               />
+              {!!errors["State"] && (
+                <FieldError message={errors["State"].message} />
+              )}
             </Grid>
           </Grid>
           <Grid container justifyContent={"center"} paddingBottom={2}>
@@ -246,6 +269,9 @@ const EventForm = () => {
                   />
                 )}
               />
+              {!!errors["PostCode"] && (
+                <FieldError message={errors["PostCode"].message} />
+              )}
             </Grid>
           </Grid>
           <Grid container justifyContent={"center"} paddingBottom={2}>
@@ -292,6 +318,9 @@ const EventForm = () => {
                   </>
                 )}
               />
+              {!!errors["EventPhoto"] && (
+                <FieldError message={errors["EventPhoto"].message} />
+              )}
             </Grid>
           </Grid>
         </Grid>
