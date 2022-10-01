@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import { Suspense, lazy } from "react"
+import { Route, Routes } from "react-router-dom"
+import "./App.css"
+import { ThemeProvider } from "@mui/material"
+import { theme } from "styles/globaltheme"
+import Layout from "styles/layout"
+
+const Landing = lazy(() => import("pages/landing"))
+const EventCreate = lazy(() => import("pages/eventcreate"))
+const Event = lazy(() => import("pages/event"))
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+      <Suspense fallback={<div>loading</div>}>
+        <ThemeProvider theme={theme}>
+          <Layout>
+            <Routes>
+              <Route index element={<Landing />} />
+              <Route path="/create" element={<EventCreate />} />
+              <Route path="/event" element={<Event />} />
+            </Routes>
+          </Layout>
+        </ThemeProvider>
+      </Suspense>
+    </>
+  )
 }
 
-export default App;
+export default App
